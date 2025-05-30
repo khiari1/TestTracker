@@ -21,24 +21,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup .NET 6 SDK
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '6.0.x'
-
       - name: Restore .NET dependencies
         run: dotnet restore ${{ env.SERVER_APP_PROJECT }}
 
       - name: Build .NET project
         run: dotnet build ${{ env.SERVER_APP_PROJECT }} --configuration Release --output ${{ env.BACKEND_ARTIFACT_PATH }}
-
-      - name: Setup Node.js 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install Angular CLI globally
-        run: npm install -g @angular/cli
 
       - name: Install npm packages (frontend)
         working-directory: ${{ env.CLIENT_APP_DIRECTORY }}
