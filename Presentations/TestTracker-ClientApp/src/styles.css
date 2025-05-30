@@ -1,0 +1,311 @@
+/* You can add global styles to this file, and also import other style files */
+
+.light {
+  --surface-a: #ffffff;
+  --surface-b: #f7f8f8;
+  --surface-c: #f3f3f3;
+  --surface-d: #f9f9fa;
+  --surface-e: var(--surface-a);
+  --surface-f: var(--surface-a);
+  --text-color: #292d31;
+  --text-color-secondary: #50575e;
+  --primary-color: #167cc0;
+  --primary-color-text: #ffffff;
+  --font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  --surface-0: var(--surface-a);
+  --surface-50: var(--surface-b);
+  --surface-100: var(--surface-c);
+  --surface-200: #dfdfdf;
+  --surface-300: #E0E0E0;
+  --surface-400: #BDBDBD;
+  --surface-500: #9E9E9E;
+  --surface-600: #757575;
+  --surface-700: #616161;
+  --surface-800: #424242;
+  --surface-900: #212121;
+  --gray-50: #FAFAFA;
+  --gray-100: #F5F5F5;
+  --gray-200: #EEEEEE;
+  --gray-300: #E0E0E0;
+  --gray-400: #BDBDBD;
+  --gray-500: #9E9E9E;
+  --gray-600: #757575;
+  --gray-700: #616161;
+  --gray-800: #424242;
+  --gray-900: #212121;
+  --content-padding: 1rem;
+  --inline-spacing: 0.5rem;
+  --border-radius: 3px;
+  --surface-ground: #f8f9fa;
+  --surface-section: #ffffff;
+  --surface-card: #ffffff;
+  --surface-overlay: #ffffff;
+  --surface-border: #dee2e6;
+  --surface-hover: #e9ecef;
+  --maskbg: rgba(0, 0, 0, 0.4);
+  --focus-ring: 0 0 0 0.2rem #a6d5fa;
+  color-scheme: light;
+}
+* {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-family: var(--font-family);
+  font-weight: 400 ;
+}
+.wrapper .sidebar {
+  position: fixed;
+  top: 55px;
+  left: 0;
+  width: 55px;
+  height: calc(100% - 55px);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  border-right: solid 1px #dfe2e9;
+  box-shadow: 0px 5px 10px 0px #d7d7d78a;
+  font-size: 1rem;
+}
+.wrapper .header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 94px;
+}
+.wrapper .container{
+    position: fixed;
+    width: 100%;
+    margin-top: 94px;
+    /* margin-left: 55px; */
+    bottom: 0px;
+    height: calc(100% - 94px);
+    scroll-behavior: auto;
+    overflow-y: auto;
+    z-index: 0;
+}
+
+.spinner {
+  animation: s5 1s linear infinite;
+}
+
+.textconsolas {
+  font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
+
+
+.p-datatable .p-datatable-tbody > tr > td
+{
+ max-width: 0;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+}
+
+.ellipsis {
+  position: relative;
+}
+.ellipsis:before {
+  content: '&nbsp;';
+  visibility: hidden;
+}
+.ellipsis span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+@keyframes s5 { 100% {
+  -webkit-transform: rotate(360deg);
+  transform:rotate(360deg);
+} }
+
+.p-menuitem-link-active{
+    background-color: #e9ecef;
+}
+.p-component-overlay{
+  display: none;
+}
+
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre-wrap;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: calc(100% - this);
+}
+
+tbody th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+}
+
+.p-dialog-content {
+  overflow-y: visible;
+  flex-grow: 1;
+}
+.p-overlaypanel {
+  margin-top: 5px;
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #f1f1f1;
+  border-bottom-color: #4385e7;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  }
+
+  @keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+  } 
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+/* #menubar */
+.menu-bar {
+  overflow: auto;
+  scroll-behavior: smooth;
+  width: inherit;
+}
+.menu-bar a{
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: var(--text-color-secondary);
+  transition: background-color 0.2s, color 0.2s;
+}
+.menu-bar-vertical ul{
+  flex-direction: column;
+}
+.menu-bar-vertical a{
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: var(--text-color);
+  transition: background-color 0.2s, color 0.2s;
+  border-bottom: var(--surface-200) solid 1px;
+  width: 175px;
+
+}
+.menu-bar-horizontal ul{
+  flex-direction: row;
+}
+.menu-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+}
+.menu-bar li {
+  display: block;
+}
+
+.menu-bar-vertical a.active {
+  border-left: 3px inset #2a72c4;
+}
+.menu-bar-horizontal a.active {
+  border-bottom: 3px inset #2a72c4;
+}
+
+.menu-bar-sm {
+  overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    overscroll-behavior: contain auto;
+}
+
+.menu-bar-sm ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  flex: 1 1 auto;
+}
+
+.menu-bar-sm .menu-item-sm {
+  color: var(--text-color);
+  background-color: var(--surface-50);
+  padding: 0.5rem 0.5rem;
+  margin: 0.25rem;
+  /* font-weight: 300; */
+  transition: box-shadow 0.2s;
+    border-radius: 5px;
+  border:1px solid var(--surface-200);
+}
+
+.menu-bar-sm ul li a:hover {
+  color: var(--text-color);
+  background-color: var(--surface-100);
+  cursor: pointer;
+}
+
+.sub-menu-content{
+  background-color: var(--surface-50);
+  border-radius: 5px;
+  border:1px solid var(--surface-200);
+  color: var(--text-color);
+  position: absolute;
+  display: none;
+
+}
+
+.sub-menu-content.expanded {
+  display:flex ;
+}
+
+.sub-menu-content .sub-menu-item {
+  display: block;
+  position: relative;
+  background-color: transparent;
+}
+
+.sub-menu-content .sub-menu-item li a {
+  display: block;
+  position: relative;
+  background-color: transparent;
+  padding: 0.75rem 0.75em;
+}
+

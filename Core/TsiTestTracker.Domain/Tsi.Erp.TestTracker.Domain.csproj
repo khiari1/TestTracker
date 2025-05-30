@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MappingModel\Settings.cs" />
+    <Compile Remove="Stores\AzureDevops.cs" />
+    <Compile Remove="Stores\ParamSetting.cs" />
+    <Compile Remove="Stores\UserReq.cs" />
+    <Compile Remove="Repositories\AssemblyRepository.cs" />
+    <Compile Remove="Repositories\CommentRepository.cs" />
+    <Compile Remove="Repositories\FileRepository.cs" />
+    <Compile Remove="Repositories\FunctionalityRepository.cs" />
+    <Compile Remove="Repositories\GenericRepository.cs" />
+    <Compile Remove="Repositories\GroupRepository.cs" />
+    <Compile Remove="Repositories\JobRepository.cs" />
+    <Compile Remove="Repositories\MenuRepository.cs" />
+    <Compile Remove="Repositories\ModuleSettingsRepository.cs" />
+    <Compile Remove="Repositories\MonitoringRepository.cs" />
+    <Compile Remove="Repositories\PermissionRepository.cs" />
+    <Compile Remove="Repositories\ResourceRepository.cs" />
+    <Compile Remove="Repositories\SettingsRepository.cs" />
+    <Compile Remove="Repositories\SubMenuRepository.cs" />
+    <Compile Remove="Repositories\TicketRepository.cs" />
+    <Compile Remove="Repositories\UserRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Identity\Tsi.Extensions.Identity.Stores\Tsi.Extensions.Identity.Stores.csproj" />
+    <ProjectReference Include="..\Tsi.Erp.TestTracker.Abstractions\Tsi.Erp.TestTracker.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

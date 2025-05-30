@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Tsi.Erp.TestTracker.Domain": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:51372;http://localhost:51375"
+    }
+  }
+}

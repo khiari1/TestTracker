@@ -1,0 +1,203 @@
+<div class="grid" *ngIf="me">
+  <div class="col-12 md:col-6">
+    <div class="text-2xl">
+        {{me.userName}}
+    </div>
+    <div class="py-2 mb-2">
+    <button
+    [hasPermission]="'User_Read'"
+              pButton
+              
+              label="reload"
+              icon="pi pi-sync"
+              class=" pb-2 p-button-text p-button-primary"
+            ></button>
+    </div>
+
+    <div class="py-2 mb-2">
+      <img [src]="imageUrl" alt="">
+      </div>
+
+  <div class="p-fluid ">
+    <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Display name</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          [(ngModel)]="me.userName"
+          class="p-inputtext p-component p-element"
+        />
+      </div>
+    </div>
+    <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">First name</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.firstName"
+        />
+      </div>
+    </div>
+    <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Last name</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          name="surname"
+          [(ngModel)]="me.lastName"
+        />
+      </div>
+    </div>
+    <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Object ID</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.id"
+        />
+      </div>
+    </div>
+    <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Job title</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.jobTitle"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Company name</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.companyName"
+        />
+      </div>
+    </div>
+    <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Department</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.departement"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Employee type</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.employeeType"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Office location</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.officeLocation"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Street address</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.streetAddress"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">City</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.city"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">ZIP or postal code</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.postalCode"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Country or region</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.country"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Mobile phone</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.mobilePhone"
+        />
+      </div>
+  </div>
+  <div class="field grid">
+      <label htmlfor="name3" class="col-12 mb-2 md:col-4 md:mb-0">Email</label>
+      <div class="col-12 md:col-8">
+        <input
+          pinputtext=""
+          id="name3"
+          type="text"
+          class="p-inputtext p-component p-element"
+          [(ngModel)]="me.mail"
+        />
+      </div>
+  </div>
+</div>

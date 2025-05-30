@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Configuration\**" />
+    <EmbeddedResource Remove="Configuration\**" />
+    <None Remove="Configuration\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Repositories\IAssemblyRepository.cs" />
+    <Compile Remove="Repositories\ICommentRepository.cs" />
+    <Compile Remove="Repositories\IFileRepository.cs" />
+    <Compile Remove="Repositories\IGenericRepository.cs" />
+    <Compile Remove="Repositories\IGroupRepository.cs" />
+    <Compile Remove="Repositories\IMenuRepository.cs" />
+    <Compile Remove="Repositories\IModuleSettingsRepository.cs" />
+    <Compile Remove="Repositories\IMonitoringRepository.cs" />
+    <Compile Remove="Repositories\IPermissionRepository.cs" />
+    <Compile Remove="Repositories\IResourceRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Tsi.Erp.TestTracker.Abstractions\Tsi.Erp.TestTracker.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Core\TsiTestTracker.Domain\Tsi.Erp.TestTracker.Domain.csproj" />
+    <ProjectReference Include="..\..\Identity\Tsi.AspNetCore.Identity.EntityFrameworkCore\Tsi.AspNetCore.Identity.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+</Project>

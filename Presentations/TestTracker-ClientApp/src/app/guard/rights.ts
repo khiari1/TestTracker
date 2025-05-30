@@ -1,0 +1,23 @@
+export enum Rights {
+  User_Read = 'User_Read',
+  User_ReadWrite = 'User_ReadWrite',
+  User_EnableDisableAccount = 'User_EnableDisableAccount',
+  Group_Read = 'Group_Read',
+  Group_ReadWrite = 'Group_ReadWrite',
+  Comment_Read = 'Comment_Read',
+  Comment_ReadWrite = 'Comment_ReadWrite',
+  File_Read = 'File_Read',
+  File_ReadWrite = 'File_ReadWrite',
+  Hangfire_Read = 'Hangfire_Read',
+  Module_Read = 'Module_Read',
+  Module_ReadWrite = 'Module_ReadWrite',
+  Monitoring_Read = 'Monitoring_Read',
+  Monitoring_ReadWrite = 'Monitoring_ReadWrite',
+  Ticket_Read = 'Ticket_Read',
+  Ticket_ReadWrite = 'Ticket_ReadWrite',
+  Settings_Read = 'Settings_Read',
+  Settings_ReadWrite = 'Settings_ReadWrite',
+  Features_Read = 'Features_Read',
+  Features_ReadWrite = 'Features_ReadWrite',
+
+}

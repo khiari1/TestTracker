@@ -1,0 +1,89 @@
+{
+    "data":
+    [  
+        {  
+            "data":{  
+                "name":"Applications",
+                "size":"200mb",
+                "type":"Folder"
+            },
+            "children":[  
+                {  
+                    "data":{  
+                        "name":"Angular",
+                        "size":"25mb",
+                        "type":"Folder",
+                        "aa" : "AA"
+                    },
+                    "children":[  
+                        {  
+                            "data":{  
+                                "name":"angular.app",
+                                "size":"10mb",
+                                "type":"Application",
+                                "aa" : "AA"
+                            }
+                        },
+                        {  
+                            "data":{  
+                                "name":"cli.app",
+                                "size":"10mb",
+                                "type":"Application",
+                                "aa" : "AA"
+                            }
+                        },
+                        {  
+                            "data":{  
+                                "name":"mobile.app",
+                                "size":"5mb",
+                                "type":"Application",
+                                "aa" : "AA"
+                            }
+                        }
+                    ]
+                },
+                {  
+                    "data":{  
+                        "name":"editor.app",
+                        "size":"25mb",
+                        "type":"Application",
+                        "aa" : "AA"
+                    }
+                },
+                {  
+                    "data":{  
+                        "name":"settings.app",
+                        "size":"50mb",
+                        "type":"Application",
+                        "aa" : "AA"
+                    }
+                }
+            ]
+        },
+        {  
+            "data":{  
+                "name":"Cloud",
+                "size":"20mb",
+                "type":"Folder"
+            },
+            "children":[  
+                {  
+                    "data":{  
+                        "name":"backup-1.zip",
+                        "size":"10mb",
+                        "type":"Zip",
+                        "aa" : "AA"
+                    }
+                },
+                {  
+                    "data":{  
+                        "name":"backup-2.zip",
+                        "size":"10mb",
+                        "type":"Zip",
+                        "aa" : "AA"
+                    }
+                }
+            ]
+        }
+    ]
+}

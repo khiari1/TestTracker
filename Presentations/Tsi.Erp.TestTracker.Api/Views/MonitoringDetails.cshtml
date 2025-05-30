@@ -1,0 +1,51 @@
+﻿@using Tsi.Erp.TestTracker.Domain.Stores
+
+@model IEnumerable<MonitoringDetail>
+
+@{
+    var model = Model.GroupBy(m => m.Monitoring)
+                            .Select(m => new
+                            {
+                                m.Key,
+                                Success = m.Where(m => m.Status == Status.Success).Count(),
+                                Error = m.Where(m => m.Status == Status.Error).Count(),
+                                Warning = m.Where(m => m.Status == Status.Warning).Count(),
+                                Failed = m.Where(m => m.Status == Status.Failed).Count(),
+                                Skipped = m.Where(m => m.Status == Status.Skipped).Count()
+                            });
+}
+
+<html>
+    <style>
+        table tr th {
+            background-color: lightgray;
+            color : black;
+        }
+    </style>
+<body>
+    <div>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th width="300px">Module</th>
+                <th width="100px" style="background-color : green">Success</th>
+                <th width="100px" style="background-color : yellowgreen" >Warning</th>
+                <th width="100px" style="background-color : orangered" >Failed</th>
+                <th width="100px" style="background-color : red" >Error</th>
+                <th width="100px" style="background-color : gray" >Skipped</th>
+            </tr>
+            @foreach (var item in model)
+            {
+                <tr>
+                    <td>@item.Success</td>
+                    <td>@item.Warning</td>
+                    <td>@item.Failed</td>
+                    <td>@item.Error</td>
+                    <td>@item.Skipped</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using Tsi.Erp.TestTracker.Domain.Abstraction;
+global using System.Reflection;
+global using Tsi.Erp.TestTracker.Domain;
+global using Tsi.Erp.TestTracker.Domain.Repositories;
+global using System.Linq.Extensions;

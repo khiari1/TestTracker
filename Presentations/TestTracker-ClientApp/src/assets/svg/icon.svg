@@ -1,0 +1,20 @@
+<svg width="32" height="32" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="120" height="120" rx="20" fill="#4F46E5"/>
+    
+    <!-- Content group -->
+    <g transform="translate(20, 20)">
+      <!-- Transparent circle with stroke -->
+      <circle cx="20" cy="20" r="10" fill="none" stroke="#A5B4FC" stroke-width="2"/>
+      
+      <!-- Test lines -->
+      <rect x="40" y="10" width="40" height="10" rx="2" fill="#E0E7FF"/>
+      <rect x="40" y="30" width="30" height="10" rx="2" fill="#E0E7FF"/>
+      <circle cx="20" cy="50" r="10" fill="#A5B4FC"/>
+      <rect x="40" y="45" width="35" height="10" rx="2" fill="#E0E7FF"/>
+    </g>
+  
+    <!-- Play icon outside bottom-right -->
+    <polygon points="95,85 95,105 115,95" fill="#22C55E"/>
+  </svg>
+  

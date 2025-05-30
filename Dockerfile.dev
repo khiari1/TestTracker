@@ -1,0 +1,40 @@
+# ============  1 : Build Angular App (v14.3.0) ============
+FROM node:16.20 AS angular-build
+WORKDIR /app
+
+# Copier uniquement les fichiers du frontend Angular
+COPY Presentations/TestTracker-ClientApp ./Tsi.Erp.TestTracker.ClientApp
+WORKDIR /app/Tsi.Erp.TestTracker.ClientApp
+
+# Installer les dépendances et builder l'app Angular
+RUN npm install
+RUN npm run build --prod
+
+# ============  2 : Build .NET 8 API ========================
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copier tous les fichiers du projet .NET
+COPY . .
+
+# Restaurer les dépendances
+RUN dotnet restore Presentations/Tsi.Erp.TestTracker.Api/Tsi.Erp.TestTracker.Api.csproj
+
+# Publier le projet en mode release
+RUN dotnet publish Presentations/Tsi.Erp.TestTracker.Api/Tsi.Erp.TestTracker.Api.csproj -c Release -o /app/publish
+
+# ============  3 : Runtime .NET + Angular ==================
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+WORKDIR /app
+
+# Copier le build de l'API
+COPY --from=build /app/publish .
+
+# Copier les fichiers compilés Angular dans wwwroot
+COPY --from=angular-build /app/Tsi.Erp.TestTracker.ClientApp/dist ./wwwroot
+
+# Exposer le port HTTP
+EXPOSE 80
+
+# Lancer l'application
+ENTRYPOINT ["dotnet", "Tsi.Erp.TestTracker.Api.dll"]

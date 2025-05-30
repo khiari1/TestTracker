@@ -1,0 +1,178 @@
+name: CI-CD - Build and Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  SERVER_APP_PROJECT: Presentations/Tsi.Erp.TestTracker.Api/Tsi.Erp.TestTracker.Api.csproj
+  BACKEND_ARTIFACT_PATH: backend
+  CLIENT_APP_DIRECTORY: Presentations/TestTracker-ClientApp
+  FRONTEND_ARTIFACT_PATH: Presentations/TestTracker-ClientApp/dist
+
+jobs:
+  build:
+    name: Build and Publish
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 6 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore .NET dependencies
+        run: dotnet restore ${{ env.SERVER_APP_PROJECT }}
+
+      - name: Build .NET project
+        run: dotnet build ${{ env.SERVER_APP_PROJECT }} --configuration Release --output ${{ env.BACKEND_ARTIFACT_PATH }}
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Angular CLI globally
+        run: npm install -g @angular/cli
+
+      - name: Install npm packages (frontend)
+        working-directory: ${{ env.CLIENT_APP_DIRECTORY }}
+        run: npm install
+
+      - name: Build Angular app
+        working-directory: ${{ env.CLIENT_APP_DIRECTORY }}
+        run: ng build
+
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend
+          path: ${{ env.BACKEND_ARTIFACT_PATH }}
+
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend
+          path: ${{ env.FRONTEND_ARTIFACT_PATH }}
+
+  deploy:
+    name: Deploy to IIS
+    needs: build
+    runs-on: self-hosted
+  
+    steps:
+      - name: Open port 5050 in Windows Firewall
+        shell: powershell
+        run: |
+          $port = 5050
+          if (-not (Get-NetFirewallRule -DisplayName "IIS Port $port" -ErrorAction SilentlyContinue)) {
+            New-NetFirewallRule -DisplayName "IIS Port $port" -Direction Inbound -Action Allow -Protocol TCP -LocalPort $port
+            Write-Host "Règle de pare-feu ajoutée pour le port $port"
+          } else {
+            Write-Host "La règle de pare-feu pour le port $port existe déjà"
+          }
+  
+      - name: Clean and Download backend artifact
+        shell: powershell
+        run: |
+          $folder = "${{ github.workspace }}\backend"
+          if (Test-Path $folder) {
+            Remove-Item -Recurse -Force -Path $folder
+          }
+        
+      - uses: actions/download-artifact@v4
+        with:
+          name: backend
+          path: backend
+  
+      - name: Clean and Download frontend artifact
+        shell: powershell
+        run: |
+          $folder = "${{ github.workspace }}\frontend"
+          if (Test-Path $folder) {
+            Remove-Item -Recurse -Force -Path $folder
+          }
+       
+      - uses: actions/download-artifact@v4
+        with:
+          name: frontend
+          path: frontend
+  
+      - name: Configure IIS binding (All Unassigned:5050)
+        shell: powershell
+        run: |
+          Import-Module WebAdministration
+          $siteName = "testtracker"
+          $port = 5050
+          $path = "C:\inetpub\wwwroot\testtracker-ui"
+          if (!(Test-Path $path)) {
+              New-Item -ItemType Directory -Path $path | Out-Null
+          }
+          if (!(Get-Website -Name $siteName -ErrorAction SilentlyContinue)) {
+              New-Website -Name $siteName -Port $port -PhysicalPath $path -ApplicationPool "DefaultAppPool"
+              Write-Host "Site IIS '$siteName' créé avec binding sur port $port"
+          } else {
+              Set-ItemProperty "IIS:\Sites\$siteName" -Name physicalPath -Value $path
+              $existingBinding = (Get-WebBinding -Name $siteName | Where-Object { $_.bindingInformation -like "*:${port}:*" })
+              if (-not $existingBinding) {
+                  New-WebBinding -Name $siteName -Protocol http -Port $port -IPAddress "*" 
+                  Write-Host "Binding ajouté sur *:$port pour $siteName"
+              } else {
+                  Write-Host "Binding sur port $port déjà existant pour $siteName"
+              }
+          }
+  
+      - name: Show server IP address
+        shell: powershell
+        run: |
+          Write-Host "Adresse IP du serveur :"
+          Get-NetIPAddress -AddressFamily IPv4 `
+            | Where-Object { $_.InterfaceAlias -notlike '*Loopback*' -and $_.IPAddress -notlike '169.*' } `
+            | ForEach-Object { $_.IPAddress }
+  
+      - name: Copy frontend files to IIS directory
+        shell: powershell
+        run: |
+          $source = "${{ github.workspace }}\frontend"
+          $destination = "C:\inetpub\wwwroot\testtracker-ui"
+          Copy-Item -Path "$source\*" -Destination $destination -Recurse -Force
+          Write-Host "Fichiers frontend copiés dans $destination"
+  
+      - name: Give IIS user access to frontend directory
+        shell: powershell
+        run: |
+          $folderPath = "C:\inetpub\wwwroot\testtracker-ui"
+          $iisUser = "IIS AppPool\DefaultAppPool"
+          $acl = Get-Acl $folderPath
+          $permission = "$iisUser","FullControl","ContainerInherit,ObjectInherit","None","Allow"
+          $accessRule = New-Object System.Security.AccessControl.FileSystemAccessRule $permission
+          $acl.SetAccessRule($accessRule)
+          Set-Acl $folderPath $acl
+          Write-Host "Droits donnés à '$iisUser' sur '$folderPath'"
+  
+      - name: Ensure Default Document is enabled
+        shell: powershell
+        run: |
+          Import-Module WebAdministration
+          $siteName = "testtracker"
+          $defaultDoc = "index.html"
+          if (-not (Get-WebConfigurationProperty -pspath "IIS:\Sites\$siteName" -Filter system.webServer/defaultDocument/files/add -name "." | Where-Object {$_.value -eq $defaultDoc})) {
+              Add-WebConfigurationProperty -pspath "IIS:\Sites\$siteName" -filter "system.webServer/defaultDocument/files" -name "." -value @{value=$defaultDoc}
+              Write-Host "Document par défaut '$defaultDoc' ajouté à $siteName"
+          } else {
+              Write-Host "Document par défaut '$defaultDoc' déjà présent"
+          }
+  
+      - name: Restart IIS site
+        shell: powershell
+        run: |
+          Restart-WebItem 'IIS:\Sites\testtracker'
+          Write-Host "Site 'testtracker' redémarré"
+  
+      - name: Deployment success message
+        run: echo "Deployment successfully completed on IIS."
